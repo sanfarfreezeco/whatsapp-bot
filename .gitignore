@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# Node Modules
+node_modules
+
+# Auth
+.wwebjs_auth
+.wwebjs_cache
+
+# Logs
+logs
