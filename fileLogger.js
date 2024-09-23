@@ -14,7 +14,6 @@ function consoleFileLog(logs) {
     if (!fs.existsSync(folder1)) {
         fs.mkdirSync(folder1);
     }
-    
     if (!fs.existsSync(file)) {
         fs.writeFileSync(file, logs);
     } else {
@@ -32,7 +31,6 @@ function sysFileLog(logs) {
     if (!fs.existsSync(folder1)) {
         fs.mkdirSync(folder1);
     }
-
     if (!fs.existsSync(file)) {
         fs.writeFileSync(file, logs);
     } else {
@@ -58,7 +56,35 @@ function msgFileLog(logs, user, id) {
     if (!fs.existsSync(folder3)) {
         fs.mkdirSync(folder3);
     }
+    if (!fs.existsSync(file)) {
+        fs.writeFileSync(file, logs);
+    } else {
+        fs.appendFileSync(file, "\n" + logs);
+    }
+}
 
+function msgDateFileLog(logs, user, id) {
+    const folder1 = folder0 + "messages/";
+    const folder2 = folder1 + user + "/";
+    const folder3 = folder2 + id + "/";
+    const folder4 = folder3 + "date/";
+    const file = folder4 + "msg_" + user + "_" + id + "_" + date.format(new Date(), dateFileFormat) + ".log";
+
+    if (!fs.existsSync(folder0)) {
+        fs.mkdirSync(folder0);
+    }
+    if (!fs.existsSync(folder1)) {
+        fs.mkdirSync(folder1);
+    }
+    if (!fs.existsSync(folder2)) {
+        fs.mkdirSync(folder2);
+    }
+    if (!fs.existsSync(folder3)) {
+        fs.mkdirSync(folder3);
+    }
+    if (!fs.existsSync(folder4)) {
+        fs.mkdirSync(folder4);
+    }
     if (!fs.existsSync(file)) {
         fs.writeFileSync(file, logs);
     } else {
@@ -75,6 +101,7 @@ function sysLog(logs) {
 function msgLog(logs, user, id) {
     consoleFileLog(logs);
     msgFileLog(logs, user, id);
+    msgDateFileLog(logs, user, id);
     console.log(logs);
 }
 

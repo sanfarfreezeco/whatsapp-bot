@@ -8,18 +8,22 @@ function messageLogger() {
         let from;
         let user;
         let id = message.from.slice(0, -5);
-        if(message.from.slice(-5) === "@c.us") {
+        if (message.fromMe) {
+            if (message.to.slice(-5) === "@c.us") {
+                from = "]: +" + message.from.slice(0, -5) + ": ";
+                user = "user";
+                id = message.to.slice(0, -5);
+            } else if (message.to.slice(-5) === "@g.us") {
+                from = "]: Group: " + message.to.slice(0, -5) + ": " + message.author.slice(0, -5) + ": ";
+                user = "group";
+                id = message.to.slice(0, -5);
+            }
+        } else if (message.from.slice(-5) === "@c.us") {
             from = "]: +" + message.from.slice(0, -5) + ": ";
             user = "user";
-            if (message.fromMe) {
-                id = message.to.slice(0, -5);
-            }
-        } else if(message.from.slice(-5) === "@g.us") {
-            from = "]: Group=" + message.from.slice(0, -5) + ": ";
+        } else if (message.from.slice(-5) === "@g.us") {
+            from = "]: Group: " + message.from.slice(0, -5) + ": " + message.author.slice(0, -5) + ": ";
             user = "group";
-            if (message.fromMe) {
-                id = message.to.slice(0, -5);
-            }
         }
         let msg = "[" + date.format(now, dateFormat) + from + message.body;
         msgLog(msg, user, id);
